@@ -1,0 +1,23 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RomanMay/Todo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RomanMay/Todo/issues"
+  },
+  "homepage": "https://github.com/RomanMay/Todo#readme",
+  "description": ""
+}
