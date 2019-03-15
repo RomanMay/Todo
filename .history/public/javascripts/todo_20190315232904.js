@@ -140,6 +140,7 @@ $(() => {
 	if (stringifyTasks) {
 
 		let parseArray = JSON.parse(stringifyTasks)
+
 		for (let i = 0; i < parseArray.length; i++) {
 			$(".container").append(generateTaskView(parseArray[i]))
 			nextId = getMaxId(parseArray) + 1

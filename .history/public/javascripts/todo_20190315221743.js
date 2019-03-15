@@ -1,4 +1,4 @@
-let changeIsActive = null
+let changeIsActive
 function getTasksFromStorage() {
 	return JSON.parse(localStorage.getItem('tasksArray')) || []
 }
@@ -8,8 +8,7 @@ function saveTasksToStorage(tasks) {
 }
 
 function changeTask(id, text) {
-	if (changeIsActive !== null) {
-
+	if (changeIsActive) {
 		if (changeIsActive === id) {
 			changeTaskText(id, text)
 			$('#' + id + '> .task_text').replaceWith(function () {
@@ -22,12 +21,12 @@ function changeTask(id, text) {
 
 	} else {
 		changeIsActive = id
-		const task = getTaskById(id)
-		console.log(task)
-		$('#' + task.id + '> .task_text').replaceWith(function () {
+		let task = getTaskById(id)
+		let tasks = getTasksFromStorage()
+		$('#' + tasks.id + '> .task_text').replaceWith(function () {
 			return `<input class="task_text" value="${task.text}">`
 		})
-		$('#' + task.id + '> .change').text("Save")
+		$('#' + tasks.id + '> .change').text("Save")
 
 	}
 
@@ -45,12 +44,11 @@ function changeTaskText(taskId, text) {
 
 	for (i = 0; i < tasks.length; i++) {
 		if (tasks[i].id === taskId) {
-			tasks[i].text = text
+			tasks.text = text
 		}
 		result.push(tasks[i])
 	}
-	saveTasksToStorage(result)
-
+	return result
 }
 
 
@@ -77,8 +75,8 @@ const editButtonHandler = function (id) {
 	// 	return task.id == id
 	// })
 	let text
-	if (changeIsActive !== null) {
-		text = $('#' + id + '> .task_text').val()
+	if (changeIsActive) {
+		text = $('.task_text').val()
 	}
 
 	changeTask(id, text)
@@ -140,6 +138,7 @@ $(() => {
 	if (stringifyTasks) {
 
 		let parseArray = JSON.parse(stringifyTasks)
+
 		for (let i = 0; i < parseArray.length; i++) {
 			$(".container").append(generateTaskView(parseArray[i]))
 			nextId = getMaxId(parseArray) + 1

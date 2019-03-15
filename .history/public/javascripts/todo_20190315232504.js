@@ -23,7 +23,7 @@ function changeTask(id, text) {
 	} else {
 		changeIsActive = id
 		const task = getTaskById(id)
-		console.log(task)
+		console.log
 		$('#' + task.id + '> .task_text').replaceWith(function () {
 			return `<input class="task_text" value="${task.text}">`
 		})
@@ -49,6 +49,7 @@ function changeTaskText(taskId, text) {
 		}
 		result.push(tasks[i])
 	}
+	console.log(result)
 	saveTasksToStorage(result)
 
 }
@@ -78,7 +79,8 @@ const editButtonHandler = function (id) {
 	// })
 	let text
 	if (changeIsActive !== null) {
-		text = $('#' + id + '> .task_text').val()
+		text = $('.task_text').val()
+		console.log(text)
 	}
 
 	changeTask(id, text)
@@ -140,6 +142,7 @@ $(() => {
 	if (stringifyTasks) {
 
 		let parseArray = JSON.parse(stringifyTasks)
+
 		for (let i = 0; i < parseArray.length; i++) {
 			$(".container").append(generateTaskView(parseArray[i]))
 			nextId = getMaxId(parseArray) + 1

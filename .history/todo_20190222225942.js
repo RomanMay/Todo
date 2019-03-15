@@ -7,6 +7,8 @@ function saveTasksToStorage(tasks) {
 	localStorage.setItem('tasksArray', JSON.stringify(tasks))
 }
 
+
+
 function changeTask(id, text) {
 	if (changeIsActive) {
 		if (changeIsActive === id) {
@@ -26,6 +28,8 @@ function changeTask(id, text) {
 			return `<input class="task_text" value="${task.text}">`
 		})
 		$('#' + task.id + '> .change').text("Save")
+		
+
 	}
 
 
@@ -68,15 +72,16 @@ const removeButtonHandler = function (id) {
 	$('#' + id).remove()
 }
 const editButtonHandler = function (id) {
-	let returnTask = getTasksFromStorage()
-	let getTaskId = returnTask.filter(function (task) {
-		return task.id == id
-	})
+	// let returnTask = getTasksFromStorage()
+	// let getTaskId = returnTask.filter(function (task) {
+	// 	return task.id == id
+	// })
 	let text
-	if(changeIsActive){
+	if (changeIsActive) {
 		text = $('.task_text').val()
 	}
-	changeTask(id, text)
+	let i = changeTask(id, text)
+	saveTasksToStorage(i)
 
 
 }
