@@ -5,8 +5,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node ./bin/www",
-		"postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/grunt",
-		"heroku-postbuild": "npm run build"
+		"postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/grunt",.
 	},
 	"private": true,
 	"author": "",
