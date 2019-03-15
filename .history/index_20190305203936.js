@@ -2,7 +2,6 @@ var express = require('express');
 let app = express();
 
 app.set('view engine', 'ejs');
-app.engine('ejs', require('ejs').__express);
 app.use(express.static('public'));
 app.get('/', function (req, res) {
 	res.render('index');

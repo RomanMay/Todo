@@ -2,8 +2,8 @@ var express = require('express');
 let app = express();
 
 app.set('view engine', 'ejs');
-app.engine('ejs', require('ejs').__express);
 app.use(express.static('public'));
+app.use(express.logger());
 app.get('/', function (req, res) {
 	res.render('index');
 })
