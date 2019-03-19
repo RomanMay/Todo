@@ -60,24 +60,10 @@ function deleteTask(taskId) {
 	let result = []
 
 	for (i = 0; i < tasks.length; i++) {
-		if (tasks[i].id === taskId) continue
+		if (tasks[i].is === taskId) continue
 		result.push(tasks[i])
 	}
 	return result
-}
-
-function completeTask(taskId) {
-	let tasks = getTasksFromStorage()
-	let result = []
-
-	for (i = 0; i < tasks.length; i++) {
-		if (tasks[i].id === taskId) {
-			tasks[i].isCompleted = true
-		}
-		result.push(tasks[i])
-	}
-	saveTasksToStorage(result)
-
 }
 
 const removeButtonHandler = function (id) {
@@ -95,15 +81,14 @@ const editButtonHandler = function (id) {
 	changeTask(id, text)
 }
 
-const isCompleteButtonHandler = function (id) {
+const isCompleteButtonHandler = function(id){
+	let tasks = getTasksFromStorage()
+	let result = []
 
-	$('#' + id + '> p').addClass("line-through")
-
-	completeTask(id)
-	localStorage.setItem("text-decoration", "line-through")
+	if(tasks[i].isCompleted == false){
+		for()
+	}
 }
-
-
 
 $(() => {
 	let nextId = 0
@@ -118,10 +103,10 @@ $(() => {
 
 	function generateTaskView(task) {
 		return `<div class="task_container" id="${task.id}">
-                    <button class="btn " id="add" onclick="isCompleteButtonHandler(${task.id})">&#10004;</button>
+                    <button class="btn " id="add" onclick="">&#10004;</button>
                     <button class="btn " id="remove" onclick="removeButtonHandler(${task.id})">&#10008;</button>
 					<button class="btn change" onclick="editButtonHandler(${task.id})">Change</button>
-					<p class="task_text ${task.isCompleted}">${task.text}</p>          
+					<p class="task_text">${task.text}</p>          
                 </div>  `
 	}
 
@@ -165,7 +150,6 @@ $(() => {
 			$(".container").append(generateTaskView(parseArray[i]))
 			nextId = getMaxId(parseArray) + 1
 		}
-
 	}
 
 	$('#task_input').on('keyup', function () {
@@ -179,10 +163,5 @@ $(() => {
 			$('#add').hide(100)
 		}
 	})
-	window.onload = function () {
-
-		$('p').css("text-decoration", localStorage.getItem("text-decoration"))
-
-	}
 
 })

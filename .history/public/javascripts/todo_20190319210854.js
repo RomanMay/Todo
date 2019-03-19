@@ -180,9 +180,9 @@ $(() => {
 		}
 	})
 	window.onload = function () {
-
-		$('p').css("text-decoration", localStorage.getItem("text-decoration"))
-
+		if (isCompleted === true) {
+			$('p').css('line-through')
+		}
 	}
 
 })

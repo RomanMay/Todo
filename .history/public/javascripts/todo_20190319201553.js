@@ -66,18 +66,18 @@ function deleteTask(taskId) {
 	return result
 }
 
-function completeTask(taskId) {
+function completeTask(taskId){
 	let tasks = getTasksFromStorage()
 	let result = []
 
-	for (i = 0; i < tasks.length; i++) {
-		if (tasks[i].id === taskId) {
+	for (i = 0; i < tasks.length; i++){
+		if(tasks[i].id === taskId){
 			tasks[i].isCompleted = true
 		}
-		result.push(tasks[i])
+		result
 	}
-	saveTasksToStorage(result)
 
+	
 }
 
 const removeButtonHandler = function (id) {
@@ -96,14 +96,8 @@ const editButtonHandler = function (id) {
 }
 
 const isCompleteButtonHandler = function (id) {
-
-	$('#' + id + '> p').addClass("line-through")
-
-	completeTask(id)
-	localStorage.setItem("text-decoration", "line-through")
+	
 }
-
-
 
 $(() => {
 	let nextId = 0
@@ -118,10 +112,10 @@ $(() => {
 
 	function generateTaskView(task) {
 		return `<div class="task_container" id="${task.id}">
-                    <button class="btn " id="add" onclick="isCompleteButtonHandler(${task.id})">&#10004;</button>
+                    <button class="btn " id="add" onclick="">&#10004;</button>
                     <button class="btn " id="remove" onclick="removeButtonHandler(${task.id})">&#10008;</button>
 					<button class="btn change" onclick="editButtonHandler(${task.id})">Change</button>
-					<p class="task_text ${task.isCompleted}">${task.text}</p>          
+					<p class="task_text">${task.text}</p>          
                 </div>  `
 	}
 
@@ -165,7 +159,6 @@ $(() => {
 			$(".container").append(generateTaskView(parseArray[i]))
 			nextId = getMaxId(parseArray) + 1
 		}
-
 	}
 
 	$('#task_input').on('keyup', function () {
@@ -179,10 +172,5 @@ $(() => {
 			$('#add').hide(100)
 		}
 	})
-	window.onload = function () {
-
-		$('p').css("text-decoration", localStorage.getItem("text-decoration"))
-
-	}
 
 })

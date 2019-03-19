@@ -100,7 +100,6 @@ const isCompleteButtonHandler = function (id) {
 	$('#' + id + '> p').addClass("line-through")
 
 	completeTask(id)
-	localStorage.setItem("text-decoration", "line-through")
 }
 
 
@@ -180,9 +179,9 @@ $(() => {
 		}
 	})
 	window.onload = function () {
-
-		$('p').css("text-decoration", localStorage.getItem("text-decoration"))
-
+		if (task.isCompleted === true) {
+			$('p').addClass('line-through')
+		}
 	}
 
 })

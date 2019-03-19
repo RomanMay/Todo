@@ -100,7 +100,6 @@ const isCompleteButtonHandler = function (id) {
 	$('#' + id + '> p').addClass("line-through")
 
 	completeTask(id)
-	localStorage.setItem("text-decoration", "line-through")
 }
 
 
@@ -121,7 +120,7 @@ $(() => {
                     <button class="btn " id="add" onclick="isCompleteButtonHandler(${task.id})">&#10004;</button>
                     <button class="btn " id="remove" onclick="removeButtonHandler(${task.id})">&#10008;</button>
 					<button class="btn change" onclick="editButtonHandler(${task.id})">Change</button>
-					<p class="task_text ${task.isCompleted}">${task.text}</p>          
+					<p class="task_text">${task.text}</p>          
                 </div>  `
 	}
 
@@ -165,7 +164,9 @@ $(() => {
 			$(".container").append(generateTaskView(parseArray[i]))
 			nextId = getMaxId(parseArray) + 1
 		}
-
+		if (task[i].isCompleted === true) {
+			$('p').addClass("line-through")
+		}
 	}
 
 	$('#task_input').on('keyup', function () {
@@ -179,10 +180,5 @@ $(() => {
 			$('#add').hide(100)
 		}
 	})
-	window.onload = function () {
-
-		$('p').css("text-decoration", localStorage.getItem("text-decoration"))
-
-	}
 
 })
