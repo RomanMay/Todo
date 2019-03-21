@@ -1,0 +1,6 @@
+$(() => {
+
+$('.registerButton').on('click')
+
+
+})
