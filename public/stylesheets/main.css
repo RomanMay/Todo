@@ -3,7 +3,18 @@
     padding: 0;
 }
 body{
-   
+	background-image: url("https://ero.mota.ru/upload/resize/1920/1200/upload/wallpapers/2018/01/09/11/07/55397/15154849865a54773a72c436.14148951-73e.jpg");
+	height: 100vh;
+	background-position: center; 
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+.main{
+	margin: 0 auto;
+	width: 100%;
+	background: rgba(0, 0, 0, .7);
+	height: 100vh;
 }
 .todo_form{
     margin: 0 auto;
@@ -12,16 +23,18 @@ body{
 	height: 100px;
     display: flex;
     flex-direction: row;
-    background: rgba(255, 255, 255, 1);
-    align-items: flex-start;
+    background: rgba(255, 255, 255, 0);
+	align-items: flex-start;
+	font-family: 'Press Start 2P', cursive;
 }
 .title{
     width: 60%;
     margin: 0 auto;
-    color: #000;
+    color: #f7f7f7;
     text-align: center;
-	font-size: 1.2em;
+	font-size: 1.6em;
 	margin-top: 50px;
+	font-family: 'Press Start 2P', cursive;
     
 
 }
@@ -35,13 +48,14 @@ body{
     display: flex;
     box-shadow: none;
     width: 100%;
-    background: rgba(255, 255, 255, .8);
+    background: rgba(255, 255, 255, 0);
     margin: 5px;
     padding: 6px;
     border: none;
-    border-bottom: 1px solid #000;
-	color: #000;
+    border-bottom: 1px solid #f7f7f7;
+	color: #f7f7f7;
 	outline:0;
+	font-family: 'Press Start 2P', cursive;
 
 }
 .btn{
@@ -49,12 +63,13 @@ body{
     align-items: flex-start;
     flex-direction: row;
     width: 50px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0);
     margin: 12px 5px 0 0 ;
-    color: #000;
+    color: #f7f7f7;
     border: 0;
 	cursor: pointer;
 	outline:0;
+	font-family: 'Press Start 2P', cursive;
 
 }
 .hide{
@@ -65,22 +80,28 @@ body{
     margin: 0 auto;
     padding: 5px 0;
     width: 60%;
-    background: rgba(255, 255, 255, 1);
-    color: #000;
-    text-align: center;
+    background: rgba(255, 255, 255, 0);
+    color: #f7f7f7;
+	text-align: center;
+	font-family: 'Press Start 2P', cursive;
 }
 
 .task_text{
     display: flex;
     box-shadow: none;
     width: 70%;
-	border-left: 1px solid #000;
-    margin-left: 20px;
+	border-left: 1px solid #f7f7f7;
+    margin-left: 40px;
     padding: 6px;
     outline:0;
-
-    color: #000;
+	font-family: 'Press Start 2P', cursive;
+	color: #f7f7f7;
+	background-color: rgba(0, 0, 0, 0);
+	border: 0;
+	
 }
+
+
 .submitBtn{
 	width: 50px;
 }
@@ -88,11 +109,12 @@ body{
 	text-decoration: line-through;
 }
 a{
-	color: #000;
+	color: #f7f7f7;
 	text-decoration: none;
 	font-size: 20px;
 	margin: 0 auto;
 	padding: 20px;
+	font-family: 'Press Start 2P', cursive;
 
 
 }

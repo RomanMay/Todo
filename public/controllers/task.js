@@ -34,9 +34,6 @@ function changeTask(id, text) {
 
 
 }
-function pererender(id, text){
-	get('tasksArray')
-}
 
 function getTaskById(id) {
 	let tasks = get('tasksArray')
@@ -59,14 +56,18 @@ function changeTaskText(taskId, text) {
 
 
 function deleteTask(taskId) {
-	let tasks = get('tasksArray')
-	let result = []
+	getItem(items => {
+		let tasksArray = []
+		tasksArray.push(items)
+		let result = []
+		for (i = 0; i < tasksArray.length; i++) {
+			if (tasksArray[i].id !== taskId) {
+				result.push(tasksArray[i])
+			}
+		}
+		return result
+	})
 
-	for (i = 0; i < tasks.length; i++) {
-		if (tasks[i].id === taskId) continue
-		result.push(tasks[i])
-	}
-	return result
 }
 
 function completeTask(taskId) {
