@@ -1,6 +1,0 @@
-$(() => {
-
-$('.registerButton').on('click', )
-
-
-})
