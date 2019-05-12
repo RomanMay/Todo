@@ -5,7 +5,10 @@
 	<meta charset="UTF-8">
 	<title>Title</title>
 	<link href="https://fonts.googleapis.com/css?family=Hind|Press+Start+2P" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Akronim" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Akronim|Josefin+Sans" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+
 </head>
 
 <body>
@@ -15,20 +18,21 @@
 		<a href="/login">login</a>
 		<div class="title">Enter your tasks</div>
 		<div class="todo_form">
-			<button class="btn hide enter" id="add">Add</button>
+			<button class="btn hide enter" id="add">&#10011;</button>
 
 			<input type="text" id="task_input">
 		</div>
-		<div class="container">
 
-		</div>
+		<div class="toDo"></div>
+		<div class="done"></div>
 	</section>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.js"
 		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="javascripts/todo.js"></script>
-	<script src="controllers/local.js"></script>
-	<script src="controllers/task.js"></script>
+	<script src="javascripts/require.js"></script>
+	<script src="controllers/api.js"></script>
 </body>
 
 </html>

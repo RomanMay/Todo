@@ -1,40 +1,73 @@
-function include(url) {
-	let script = document.createElement('local')
+const include = url => {
+	let script = document.createElement('api')
 	script.src = url;
-	let scr = document.createElement('task')
-	scr.src = url
 	document.getElementsByTagName('head')[0].appendChild(script);
 }
-
-include("controllers/local.js")
-include("controllers/task.js")
-
-const removeButtonHandler = function (id) {
-	deleteItem(id, response => {
-		console.log("TCL: removeButtonHandler -> responseId", id)
-		$('#' + id).remove()
-	})
+include("controllers/api.js")
+let changeIsActive = null
+let isCompleted = false
+let containerTrue = $('.done')
+let containerFalse = $('.toDo')
+const removeButtonHandler = id => {
+	deleteTask(id)
+		.then(response => {
+			console.log("TCL: response", response)
+			$('#' + id).remove()
+		})
 
 
 }
-const editButtonHandler = function (id) {
-	let text
+const getTaskText = taskId => {
+	const t = $('#' + taskId + '> .task_text')
+	console.log(t, t.get(0).tagName)
+	if (t.get(0).tagName === 'P') {
+		return t.text()
+	} else {
+		return t.val()
+	}
+}
 
+const editButtonHandler = id => {
+	const text = getTaskText(id)
 	if (changeIsActive !== null) {
-		text = $('#' + id + '> .task_text').val()
+		if (changeIsActive === id) {
+			updateTask(id)
+				.then(task => {
+					task.title = text
+					$('#' + id + '> .task_text').replaceWith(function () {
+						return `<p class="task_text">${task.title}</p>`
+					})
+					$('#' + id + '> .change').text("Change")
+					changeIsActive = null
+				})
+		}
 	}
 
-	changeTask(id, text)
+	else {
+		changeIsActive = id
+		$('#' + id + '> .task_text').replaceWith(() => {
+			return `<input class="task_text" value="${text}">`
+		})
+		$('#' + id + '> .change').text("Save")
+	}
 }
 
-const isCompleteButtonHandler = function (id) {
-	$('#' + id + '> .task_text').css("text-decoration", "line-through")
-	completeTask(id)
+const isCompleteButtonHandler = id => {
+	updateTask(id)
+		.then(task => {
+			$('#' + task.id + '.task_container').remove()
+			if (task.completed) {
+				$('#' + task.id + '> .task_text').css('text-decoration', 'line-through')
+				renderTask(task)
+			} else {
+				$('#' + task.id + '> .task_text').css('text-decoration', 'none')
+				renderTask(task)
+			}
+		})
 }
 
-function getMaxId(arr) {
+const getMaxId = arr => {
 	let maxId = arr[0].id
-
 	for (i = 1; i < arr.length; i++) {
 		if (maxId < arr[i].id) {
 			maxId = arr[i].id
@@ -45,44 +78,39 @@ function getMaxId(arr) {
 
 let nextId = 0
 
-function generateTaskView(task) {
-	return `<div class="task_container" id="${task.id}">
-                    <button class="btn " id="add" onclick="isCompleteButtonHandler(${task.id})">&#10004;</button>
-                    <button class="btn " id="remove" onclick="removeButtonHandler(${task.id})">&#10008;</button>
-					<button class="btn change" onclick="editButtonHandler(${task.id})">Change</button>
-					<p class="task_text ${task.completed ? 'lineThrough' : ''}"  > ${task.title}</p >          
-                </div > `
+const renderTask = task => {
+	let taskView = `<div class="task_container" id="${task.id}">
+                    <button class="btn add" id="add" onclick="isCompleteButtonHandler(${task.id})">&#10004;</button>
+					<p class="task_text ${task.completed ? 'isCompleted' : ''}"  > ${task.title}</p >    
+					<button class="btn remove" id="remove" onclick="removeButtonHandler(${task.id})">&#10008;</button>
+					<button class="btn change" onclick="editButtonHandler(${task.id})">Change</button>      
+				</div > `
+	let selectedContainer = task.completed
+		? containerTrue
+		: containerFalse
+	selectedContainer.prepend(taskView)
 }
 
 $(() => {
 
-
-	$('#add').on('click', function () {
+	$('#add').on('click', () => {
 		let text = $("#task_input").val()
-		createTask(text, items => {
-			$(".container").append(generateTaskView(items))
-			$('.container').last()
+		createTask(text)
+			.then(renderTask)
+	})
+
+	getAllTasks()
+		.then(items => {
+			if (items) {
+				for (let i = 0; i < 10; i++) {
+					renderTask(items[i])
+					nextId = getMaxId(items) + 1
+				}
+			}
 		})
 
-	})
-
-	getItem(items => {
-		save('itemsArray', items)
-		if (items) {
-			for (let i = 0; i < items.length; i++) {
-				$(".container").append(generateTaskView(items[i]))
-				nextId = getMaxId(items) + 1
-			}
-
-			console.log("TCL: items", items)
-
-		}
-	})
-
-	$('#task_input').on('keyup', function () {
-		let $this = $(this)
-		let val = $this.val()
-
+	$('#task_input').on('keyup', () => {
+		let val = $('#task_input').val()
 		if (val.length >= 1) {
 			$('#add').show(100)
 		}
@@ -90,11 +118,9 @@ $(() => {
 			$('#add').hide(100)
 		}
 	})
-	$('#task_input').keypress(function (e) {
+	$('#task_input').keypress(e => {
 		if (e.keyCode == 13) {
 			$('.enter').click()
 		}
 	})
-
-
 })

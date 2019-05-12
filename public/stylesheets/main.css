@@ -2,20 +2,32 @@
     margin: 0;
     padding: 0;
 }
+
+:root{
+	--font: 'Josefin Sans', sans-serif;
+}
+
 body{
-	background-image: url("https://ero.mota.ru/upload/resize/1920/1200/upload/wallpapers/2018/01/09/11/07/55397/15154849865a54773a72c436.14148951-73e.jpg");
+	background-image: url("https://images7.alphacoders.com/715/thumb-1920-715156.png");
 	height: 100vh;
 	background-position: center; 
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
 }
+
 .main{
 	margin: 0 auto;
 	width: 100%;
-	background: rgba(0, 0, 0, .7);
-	height: 100vh;
+	float: left;
+	background: rgba(0, 0, 0, 0);
+
 }
+
+.change{
+	margin-right: 300px;
+}
+
 .todo_form{
     margin: 0 auto;
     justify-content: center;
@@ -25,8 +37,9 @@ body{
     flex-direction: row;
     background: rgba(255, 255, 255, 0);
 	align-items: flex-start;
-	font-family: 'Press Start 2P', cursive;
+	font-family:  var(--font);
 }
+
 .title{
     width: 60%;
     margin: 0 auto;
@@ -34,16 +47,17 @@ body{
     text-align: center;
 	font-size: 1.6em;
 	margin-top: 50px;
-	font-family: 'Press Start 2P', cursive;
-    
-
+	font-family: var(--font);
 }
+
 .lineThrough{
 	text-decoration: line-through;
 }
+
 .noneDecoration{
 	text-decoration: none;
 }
+
 #task_input{
     display: flex;
     box-shadow: none;
@@ -55,35 +69,43 @@ body{
     border-bottom: 1px solid #f7f7f7;
 	color: #f7f7f7;
 	outline:0;
-	font-family: 'Press Start 2P', cursive;
+	font-family: var(--font);
 
 }
+
 .btn{
     display: inline-block;
     align-items: flex-start;
     flex-direction: row;
-    width: 50px;
-    background: rgba(255, 255, 255, 0);
-    margin: 12px 5px 0 0 ;
+	width: 50px;
+	border-radius: 20px;
+    background: rgba(30, 159, 233,0);
+    margin: 0px 5px 0 50px ;
     color: #f7f7f7;
     border: 0;
 	cursor: pointer;
 	outline:0;
-	font-family: 'Press Start 2P', cursive;
-
+	font-family: var(--font);
 }
+
 .hide{
     display: none;
 }
+
+.change{
+	width: 100px;
+}
+
 .task_container{
     display: flex;
     margin: 0 auto;
     padding: 5px 0;
-    width: 60%;
+    width: 65%;
     background: rgba(255, 255, 255, 0);
     color: #f7f7f7;
 	text-align: center;
-	font-family: 'Press Start 2P', cursive;
+	font-family: var(--font);
+	vertical-align: middle;
 }
 
 .task_text{
@@ -91,30 +113,65 @@ body{
     box-shadow: none;
     width: 70%;
 	border-left: 1px solid #f7f7f7;
-    margin-left: 40px;
+    margin-left: 30px;
     padding: 6px;
     outline:0;
-	font-family: 'Press Start 2P', cursive;
+	font-family:var(--font);
 	color: #f7f7f7;
 	background-color: rgba(0, 0, 0, 0);
 	border: 0;
-	
+	text-align: center;	
 }
 
+.remove,.change,.add{
+	visibility: hidden;
+}
+
+.add:hover{
+	color: rgba(181, 1, 1, 1);
+}
+
+.remove:hover{
+	color: rgba(181, 1, 1, 1);
+}
+
+.change:hover{
+	color: rgba(181, 1, 1, 1);
+}
+
+.task_container:hover {
+	font-size: 20px;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.task_container:hover .remove{
+	visibility: visible;
+	font-size: 20px;
+}
+
+.task_container:hover .change{
+	visibility: visible;
+	font-size: 20px;
+}
+
+.task_container:hover .add{
+	visibility: visible;
+	font-size: 20px;
+}
 
 .submitBtn{
 	width: 50px;
 }
-.line-through{
+
+.isCompleted{
 	text-decoration: line-through;
 }
+
 a{
 	color: #f7f7f7;
 	text-decoration: none;
 	font-size: 20px;
 	margin: 0 auto;
 	padding: 20px;
-	font-family: 'Press Start 2P', cursive;
-
-
+	font-family: var(--font);
 }
